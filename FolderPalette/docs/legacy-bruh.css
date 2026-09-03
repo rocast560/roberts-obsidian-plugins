@@ -1,0 +1,182 @@
+
+
+body {
+    /* Muted Rainbow Palette - Ordered for sequence */
+    --folder-color-1: #E5877E;
+    --folder-color-2: #E5877E; /* 1. Soft Red */
+    --folder-color-3: #EAA87B; /* 2. Soft Orange */
+    --folder-color-4: #E1CF80; /* 3. Soft Yellow */
+    --folder-color-5: #B1E291; /* 4. Soft Green */
+    --folder-color-6: #90C3E2; /* 5. Soft Blue */
+    --folder-color-7: #B2A7E2; /* 6. Soft Lavender */
+    --folder-color-8: #D8B2E2; /* 7. Soft Purple */
+    --folder-color-9: #E2B2D1; /* 8. Soft Pink */
+    --folder-color-10: #90DDCB; /* 9. Soft Teal */
+
+    /* SVG Icons for Files and Folders */
+    --icon-file: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>');
+    --icon-folder: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"></path></svg>');
+    --icon-folder-open: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-open"><path d="m6 14 1.45-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v1"></path></svg>');
+    
+    --ltr-icons: .lucide-check, .lucide-help-circle, .sidebar-left, .sidebar-right;
+
+    /* New variables for consistent outlining */
+    --outline-color: #383838; /* A dark grey for outlines */
+    --selected-outline-color: #8D8D8D; /* Lighter grey for selected/active outline */
+}
+
+/* Folder colors by name (set variable on the folder, keep existing styles) */
+.nav-files-container > div > .nav-folder:has(> .nav-folder-title[data-path="Archive"]) { --folder-color: var(--folder-color-2); }
+.nav-files-container > div > .nav-folder:has(> .nav-folder-title[data-path="Cyber Security"]) { --folder-color: var(--folder-color-3); }
+.nav-files-container > div > .nav-folder:has(> .nav-folder-title[data-path="Internships"]) { --folder-color: var(--folder-color-4); }
+.nav-files-container > div > .nav-folder:has(> .nav-folder-title[data-path="Miscellaneous"]) { --folder-color: var(--folder-color-5); }
+.nav-files-container > div > .nav-folder:has(> .nav-folder-title[data-path="Software Engineering"]) { --folder-color: var(--folder-color-6); }
+.nav-files-container > div > .nav-folder:has(> .nav-folder-title[data-path="University"]) { --folder-color: var(--folder-color-7); }
+
+/* File names inherit their folder's color */
+.nav-files-container > div > .nav-folder:has(> .nav-folder-title[data-path="Archive"]) .nav-file-title { color: var(--folder-color); }
+.nav-files-container > div > .nav-folder:has(> .nav-folder-title[data-path="Cyber Security"]) .nav-file-title { color: var(--folder-color); }
+.nav-files-container > div > .nav-folder:has(> .nav-folder-title[data-path="Internships"]) .nav-file-title { color: var(--folder-color); }
+.nav-files-container > div > .nav-folder:has(> .nav-folder-title[data-path="Miscellaneous"]) .nav-file-title { color: var(--folder-color); }
+.nav-files-container > div > .nav-folder:has(> .nav-folder-title[data-path="Software Engineering"]) .nav-file-title { color: var(--folder-color); }
+.nav-files-container > div > .nav-folder:has(> .nav-folder-title[data-path="University"]) .nav-file-title { color: var(--folder-color); }
+
+.nav-files-container > div > .nav-folder {
+    border: none;
+    border-left: 5px solid var(--folder-color); 
+    border-radius: var(--radius-s);
+    outline: 1px solid var(--outline-color); 
+    transform: scale(1);
+    transform-origin: left;
+    
+    background-color: var(--background-primary); 
+}
+
+.nav-files-container > div > .nav-folder.is-active,
+.nav-files-container > div > .nav-folder.is-active:focus-within {
+    outline: 1px solid var(--selected-outline-color);
+    box-shadow: 0 0 0 1px var(--selected-outline-color); 
+}
+
+.nav-files-container > div > .nav-folder + .nav-folder {
+    margin-top: 0px; 
+}
+
+.nav-folder-title {
+    color: var(--folder-color);
+    font-weight: var(--font-bold);
+    display: flex;
+    align-items: center;
+}
+
+.nav-file-title {
+    border: none;
+    border-radius: var(--radius-s);
+    outline: none;
+    padding: var(--size-2-2) var(--size-4-2);
+    margin-bottom: 2px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    color: var(--text-normal);
+}
+
+/* ================================================================= */
+/* ==== FOLDER AND FILE ICONS INTEGRATION ==== */
+/* ================================================================= */
+
+/* 1. Common style for all icons (uses masking) */
+.nav-folder-title::before,
+.nav-file-title::before {
+    content: '';
+    display: inline-block;
+    width: 1em; 
+    height: 1em;
+    flex-shrink: 0;
+    margin-right: 6px;
+    margin-left: -1em; 
+    background-color: currentColor; 
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    vertical-align: text-bottom;
+}
+
+/* 2. Set icon for COLLAPSED FOLDERS */
+.nav-folder.is-collapsed > .nav-folder-title::before {
+    -webkit-mask-image: var(--icon-folder);
+    mask-image: var(--icon-folder);
+}
+
+/* 3. Set icon for EXPANDED FOLDERS */
+.nav-folder:not(.is-collapsed) > .nav-folder-title::before {
+    -webkit-mask-image: var(--icon-folder-open);
+    mask-image: var(--icon-folder-open);
+}
+
+/* 4. Set default icon for ALL FILES */
+.nav-file-title::before {
+    -webkit-mask-image: var(--icon-file);
+    mask-image: var(--icon-file);
+}
+
+/* 5. Make file icons inherit their folder's color */
+.nav-folder .nav-file-title::before {
+    color: var(--folder-color);
+}
+
+/* 6. OVERRIDE: If a folder is a folder note, give it a FILE icon */
+.nav-folder-title.nav-file-title::before {
+    -webkit-mask-image: var(--icon-file);
+    mask-image: var(--icon-file);
+}
+
+/* ================================================================= */
+/* ==== SIDEBAR UNIFORMITY & OUTLINE ADJUSTMENTS ==== */
+/* ================================================================= */
+
+.workspace-leaf-content[data-type="file-explorer"] .nav-files-container {
+    padding: var(--size-4-2); 
+    background-color: var(--background-primary); 
+    border-radius: var(--radius-m); 
+}
+
+.nav-files-container > div > .nav-folder-title:not(.nav-file-title),
+.nav-files-container > div > .nav-folder:first-child .nav-folder-title:not(.nav-file-title) {
+    color: var(--text-normal);
+    font-weight: var(--font-bold);
+    margin-top: var(--size-4-4);
+    margin-bottom: var(--size-4-2);
+    padding: 0; 
+    border: none;
+    outline: none;
+    background-color: transparent;
+    display: block; 
+}
+
+.nav-folder-children {
+    padding-left: var(--size-4-4); 
+}
+
+.tree-item-self { margin-left: 0; }
+.tree-item-inner { padding-left: 0; }
+.nav-file, .nav-folder { background-color: transparent; }
+
+.nav-file-title.is-active,
+.nav-folder-title.is-active {
+    background-color: var(--background-modifier-hover); 
+    border-radius: var(--radius-s);
+}
+
+/* HIDE the default collapse arrow */
+.tree-item .collapse-icon {
+    display: none;
+}
+
+.nav-file-title-content, .nav-folder-title-content {
+    display: flex;
+    align-items: center;
+}
+
+

@@ -1,0 +1,21 @@
+{
+	"name": "reminder-suite",
+	"version": "0.1.0",
+	"license": "MIT",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "node esbuild.config.mjs",
+		"build": "tsc && node esbuild.config.mjs production",
+		"test": "node --test \"test/**/*.test.ts\""
+	},
+	"devDependencies": {
+		"@types/node": "26.2.0",
+		"esbuild": "0.28.2",
+		"obsidian": "1.13.1",
+		"typescript": "7.0.2"
+	},
+	"dependencies": {
+		"@event-calendar/core": "5.12.0"
+	}
+}

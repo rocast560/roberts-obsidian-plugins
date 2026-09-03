@@ -1,0 +1,152 @@
+/* ==== BetterNotes: file explorer ==== */
+
+/* the inner note row is the betternote itself — never show it separately */
+.betternote-hidden-note {
+  display: none !important;
+}
+
+/* betternote rows read as notes, not folders */
+.betternote > .nav-folder-title .nav-folder-title-content {
+  text-decoration: none;
+  font-weight: inherit;
+}
+
+/* themes/snippets often draw a folder glyph via ::before on folder titles —
+   a betternote is a note, not a folder, so suppress any folder icon there
+   (plain folders, including a revealed Attachments folder, keep theirs) */
+.betternote > .nav-folder-title::before,
+.betternote > .nav-folder-title .nav-folder-title-content::before {
+  display: none !important;
+  content: none !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+  background-image: none !important;
+}
+
+/* the note icon takes the same box as FolderPalette's folder/file glyphs so a
+   BetterNote's title lines up with sibling folders and files; the fallbacks
+   keep it sane when FolderPalette is not installed. Inherits the surrounding
+   folder's accent when --folder-color is defined. */
+.betternote-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: var(--fp-glyph-size, 16px);
+  height: var(--fp-glyph-size, 16px);
+  margin-right: var(--fp-glyph-gap, var(--size-2-2));
+  color: var(--folder-color, var(--text-muted));
+}
+
+.betternote-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* a BetterNote with children always shows its chevron, even if the explorer
+   styling plugin hides chevrons elsewhere (FolderPalette's "arrows off") */
+body .betternote:not(.betternote-no-children) > .nav-folder-title > .collapse-icon {
+  display: flex;
+}
+
+/* no chevron when there is nothing underneath (besides the note itself) */
+.betternote.betternote-no-children > .nav-folder-title .collapse-icon {
+  visibility: hidden;
+}
+
+/* the Attachments subfolder stays out of the tree until toggled visible */
+.betternote-attachments-hidden {
+  display: none !important;
+}
+
+/* global "hide children" mode — betternotes read as flat notes */
+body.betternotes-hide-children .betternote > .nav-folder-children {
+  display: none !important;
+}
+
+body.betternotes-hide-children .betternote > .nav-folder-title .collapse-icon {
+  visibility: hidden;
+}
+
+/* ==== BetterNotes: attachments bar ==== */
+
+.betternotes-attachments {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  border-top: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+  max-height: 40%;
+  overflow-y: auto;
+}
+
+.betternotes-attachments-header {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  padding: var(--size-2-2) var(--size-4-2);
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  user-select: none;
+}
+
+.betternotes-attachments-chevron {
+  margin-left: auto;
+  display: inline-flex;
+  transition: transform 120ms ease-in-out;
+}
+
+.betternotes-attachments.is-collapsed .betternotes-attachments-chevron {
+  transform: rotate(-90deg);
+}
+
+.betternotes-attachments-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-4-2);
+  padding: 0 var(--size-4-2) var(--size-4-2);
+}
+
+.betternotes-attachments.is-collapsed .betternotes-attachments-grid {
+  display: none;
+}
+
+.betternotes-attachment {
+  width: 96px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.betternotes-attachment img {
+  width: 96px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--background-modifier-border);
+}
+
+.betternotes-attachment-iconbox {
+  width: 96px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-secondary);
+  border-radius: var(--radius-s);
+  border: 1px solid var(--background-modifier-border);
+  color: var(--text-muted);
+}
+
+.betternotes-attachment-name {
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.betternotes-attachment:hover .betternotes-attachment-name {
+  color: var(--text-normal);
+}

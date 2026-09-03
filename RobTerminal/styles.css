@@ -1,0 +1,191 @@
+/* RobTerminal v2 */
+
+.robterm-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--background-primary);
+}
+
+/* Obsidian pads view content by default; a terminal wants the whole pane. */
+.workspace-leaf-content[data-type='rob-terminal-view'] .view-content {
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ---------------- toolbar ---------------- */
+
+.robterm-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  padding: 3px 8px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  background-color: var(--background-secondary);
+  font-size: 11px;
+}
+
+.robterm-spacer {
+  flex: 1 1 auto;
+}
+
+.robterm-status {
+  flex: 0 0 auto;
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background-color: var(--background-modifier-border);
+  color: var(--text-muted);
+}
+
+.robterm-status-live {
+  background-color: rgba(35, 209, 139, 0.18);
+  color: var(--color-green, #23d18b);
+}
+
+.robterm-status-starting {
+  background-color: rgba(229, 229, 16, 0.18);
+  color: var(--color-yellow, #d7ba7d);
+}
+
+.robterm-status-dead {
+  background-color: rgba(241, 76, 76, 0.16);
+  color: var(--color-red, #f14c4c);
+}
+
+/* Shown while a psmux prefix chord is pending. */
+.robterm-prefix {
+  flex: 0 0 auto;
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background-color: rgba(59, 142, 234, 0.18);
+  color: var(--color-blue, #3b8eea);
+}
+
+.robterm-prefix.hidden {
+  display: none;
+}
+
+.robterm-cwd {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-muted);
+}
+
+.robterm-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  box-shadow: none;
+  background-color: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.robterm-btn:hover {
+  background-color: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.robterm-btn .svg-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ---------------- search ---------------- */
+
+.robterm-search {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.robterm-search.hidden {
+  display: none;
+}
+
+.robterm-search-input {
+  width: 160px;
+  height: 22px;
+  padding: 0 6px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  background-color: var(--background-primary);
+  color: var(--text-normal);
+  font-size: 11px;
+}
+
+/* ---------------- terminal surface ---------------- */
+
+.robterm-term {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  padding: 4px 2px 4px 8px;
+  overflow: hidden;
+}
+
+.robterm-term .xterm {
+  height: 100%;
+}
+
+.robterm-term .xterm-viewport {
+  /* Let the terminal's own background win over Obsidian's scroller styling. */
+  background-color: transparent !important;
+  overflow-y: auto;
+}
+
+.robterm-term .xterm-viewport::-webkit-scrollbar {
+  width: 10px;
+}
+
+.robterm-term .xterm-viewport::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: var(--background-modifier-border-hover);
+}
+
+/* Obsidian styles bare textareas; xterm's hidden input must stay invisible. */
+.robterm-term .xterm-helper-textarea {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* ---------------- settings tab ---------------- */
+
+.robterm-keylist {
+  margin: 0 0 8px;
+  padding-left: 20px;
+  line-height: 1.9;
+  color: var(--text-muted);
+}
+
+.robterm-keylist code {
+  font-size: 12px;
+}
+
+.robterm-hint {
+  color: var(--text-faint);
+  font-size: 12px;
+  line-height: 1.5;
+}

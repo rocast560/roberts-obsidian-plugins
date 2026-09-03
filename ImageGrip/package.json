@@ -1,0 +1,20 @@
+{
+  "name": "image-grip",
+  "version": "0.2.0",
+  "description": "Drag corner handles to resize images in Live Preview; Ctrl+C copies the selected image",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "node esbuild.config.mjs production",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "builtin-modules": "^4.0.0",
+    "esbuild": "^0.21.5",
+    "obsidian": "^1.5.7",
+    "tslib": "^2.6.2",
+    "typescript": "^5.5.2",
+    "vitest": "^2.0.5"
+  }
+}

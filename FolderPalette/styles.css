@@ -1,0 +1,317 @@
+/* FolderPalette — settings/modal chrome only. Folder colors themselves are
+   injected at runtime into <style id="folder-palette-styles">. */
+
+.fp-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+
+/* Preview strip under the palette dropdown */
+.fp-strip-preview {
+  margin: -6px 0 14px;
+}
+
+/* Per-folder rows: keep the strip compact so it fits next to the picker */
+.fp-folder-row .fp-strip {
+  max-width: 300px;
+}
+
+.fp-folder-row .setting-item-control {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.fp-swatch,
+button.fp-swatch {
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background-color: var(--fp-color);
+  box-shadow: 0 0 0 1px var(--background-modifier-border);
+  cursor: default;
+  transition: transform 80ms ease-out;
+}
+
+button.fp-swatch {
+  cursor: pointer;
+}
+
+button.fp-swatch:hover {
+  transform: scale(1.2);
+}
+
+.fp-swatch.is-selected,
+button.fp-swatch.is-selected {
+  border-color: var(--background-primary);
+  box-shadow: 0 0 0 2px var(--text-normal);
+}
+
+/* Context-menu modal: bigger targets */
+.fp-strip-large .fp-swatch,
+.fp-strip-large button.fp-swatch {
+  width: 28px;
+  height: 28px;
+}
+
+/* Palette chooser (command): tiny inline preview */
+.fp-strip-mini {
+  gap: 3px;
+  margin-top: 3px;
+}
+.fp-strip-mini .fp-swatch {
+  width: 10px;
+  height: 10px;
+  border-width: 1px;
+  box-shadow: none;
+}
+
+/* Colored dot in front of the folder name */
+.fp-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+  vertical-align: middle;
+  background-color: var(--fp-color, transparent);
+  box-shadow: 0 0 0 1px var(--background-modifier-border);
+}
+
+.fp-modal .fp-strip-large {
+  margin: 8px 0 16px;
+}
+
+/* =====================================================================
+   Explorer look - ported from the vault's bruh.css snippet (2026-08-26).
+   Every selector is body-prefixed so it beats the theme's equal-specificity
+   rules whatever the stylesheet load order. Per-folder colors are NOT here:
+   they are injected at runtime into #folder-palette-styles.
+   ===================================================================== */
+
+body {
+  --fp-icon-file: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>');
+  --fp-icon-folder: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"></path></svg>');
+  --fp-icon-folder-open: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-open"><path d="m6 14 1.45-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v1"></path></svg>');
+  --fp-outline-color: #383838;
+  --fp-selected-outline-color: #8D8D8D;
+  /* row geometry - one indent for files, folders and BetterNotes at a depth.
+     Obsidian's virtual tree measures these (the children offset and each row's
+     padding-inline-start) and bakes them into inline styles per row. */
+  --fp-row-indent: 24px;      /* row padding-left; core puts the chevron at -20px, so it spans 4..20px */
+  --fp-glyph-size: 1em;       /* read by BetterNotes for its note icon */
+  --fp-glyph-gap: 6px;        /* read by BetterNotes for its note icon */
+  --fp-children-margin: 11px; /* children container margin: a 2px line at 11..13px centers on the chevron (12px) */
+  --fp-children-indent: 12px; /* children container padding */
+}
+
+/* top-level folder cards */
+body .nav-files-container > div > .nav-folder {
+  border: none;
+  border-left: 5px solid var(--folder-color);
+  /* NOT a no-op: Obsidian's virtual tree measures nested-row offsets through the
+     offsetParent chain, and this transform makes the card the offsetParent so
+     its 5px border is excluded from the measured indent. Dropping it widens
+     every nested row's box by the border width. */
+  transform: scale(1);
+  transform-origin: left;
+  border-radius: var(--radius-s);
+  outline: 1px solid var(--fp-outline-color);
+  background-color: var(--background-primary);
+}
+
+body .nav-files-container > div > .nav-folder.is-active,
+body .nav-files-container > div > .nav-folder.is-active:focus-within {
+  outline: 1px solid var(--fp-selected-outline-color);
+  box-shadow: 0 0 0 1px var(--fp-selected-outline-color);
+}
+
+body .nav-files-container > div > .nav-folder + .nav-folder {
+  margin-top: 0px;
+}
+
+/* rows */
+body .nav-folder-title {
+  color: var(--folder-color);
+  font-weight: var(--font-bold);
+  display: flex;
+  align-items: center;
+}
+
+body .nav-file-title {
+  border: none;
+  border-radius: var(--radius-s);
+  outline: none;
+  padding: var(--size-2-2) var(--size-4-2);
+  margin-bottom: 2px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  color: var(--text-normal);
+}
+
+/* one box for every explorer row: files, folders, BetterNotes (core gives
+   folder rows 4px 8px 4px 24px, the snippet gave file rows 4px 8px) */
+body .nav-files-container .nav-file-title,
+body .nav-files-container .nav-folder-title {
+  padding: var(--size-2-2) var(--size-4-2) var(--size-2-2) var(--fp-row-indent);
+}
+
+/* top-level files sit beside the cards, which carry a 5px colored border:
+   nudge them so their text lines up with the card rows */
+body .nav-files-container > div > .nav-file {
+  margin-left: 5px;
+}
+
+/* folder / file glyphs (masked SVG, colored by currentColor) */
+body .nav-folder-title::before,
+body .nav-file-title::before {
+  content: '';
+  display: inline-block;
+  width: var(--fp-glyph-size);
+  height: var(--fp-glyph-size);
+  flex-shrink: 0;
+  margin-right: var(--fp-glyph-gap);
+  margin-left: 0;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  vertical-align: text-bottom;
+}
+
+body .nav-folder.is-collapsed > .nav-folder-title::before {
+  -webkit-mask-image: var(--fp-icon-folder);
+  mask-image: var(--fp-icon-folder);
+}
+
+body .nav-folder:not(.is-collapsed) > .nav-folder-title::before {
+  -webkit-mask-image: var(--fp-icon-folder-open);
+  mask-image: var(--fp-icon-folder-open);
+}
+
+body .nav-file-title::before {
+  -webkit-mask-image: var(--fp-icon-file);
+  mask-image: var(--fp-icon-file);
+}
+
+body .nav-folder .nav-file-title::before {
+  color: var(--folder-color);
+}
+
+/* container + vault-root title */
+body .workspace-leaf-content[data-type="file-explorer"] .nav-files-container {
+  padding: var(--size-4-2);
+  background-color: var(--background-primary);
+  border-radius: var(--radius-m);
+}
+
+body .nav-files-container > div > .nav-folder-title:not(.nav-file-title),
+body .nav-files-container > div > .nav-folder:first-child .nav-folder-title:not(.nav-file-title) {
+  color: var(--text-normal);
+  font-weight: var(--font-bold);
+  margin-top: var(--size-4-4);
+  margin-bottom: var(--size-4-2);
+  padding: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  display: block;
+}
+
+body .nav-files-container .nav-folder-children {
+  margin-inline-start: var(--fp-children-margin);
+  padding-inline-start: var(--fp-children-indent);
+}
+
+body .nav-file,
+body .nav-folder {
+  background-color: transparent;
+}
+
+body .nav-file-title.is-active,
+body .nav-folder-title.is-active {
+  background-color: var(--background-modifier-hover);
+  border-radius: var(--radius-s);
+}
+
+body .nav-file-title-content,
+body .nav-folder-title-content {
+  display: flex;
+  align-items: center;
+}
+
+/* ==== Explorer: collapse arrows (setting "Show collapse arrows") ====
+   The snippet hid every chevron in every pane; this hides only the file
+   explorer's, and only while the setting is off. */
+body.fp-arrows-off .nav-files-container .collapse-icon {
+  display: none;
+}
+
+/* ==== Explorer: tree lines (setting "Tree lines") ====
+   Thin grey connectors drawn per row: an "L" from the row above (or the
+   parent's chevron) down to this row's center and across to its chevron or
+   glyph, with a rounded corner, plus a vertical run to the next sibling only
+   while there is one - so the last child ends in the corner, no dangling tail.
+   The children container keeps a 2px (transparent) border so the geometry is
+   identical with the setting off. */
+body.fp-tree-lines .nav-files-container {
+  --fp-tree-line-color: var(--text-faint);
+  --fp-tree-line-width: 1px;
+  --fp-tree-line-radius: 5px;
+  --fp-tree-line-reach: 11px; /* how far the L reaches up: to the tip of the parent's open chevron */
+}
+
+body.fp-tree-lines .nav-files-container .nav-folder-children {
+  border-inline-start: 2px solid transparent;
+}
+
+body.fp-tree-lines .nav-files-container .nav-folder-children > .tree-item {
+  position: relative;
+}
+
+/* the L. Positioned from the row's content box the way core positions the
+   chevron (static position + negative margin), because the row's own box
+   starts at the tree's left edge. The line column is the center of the
+   container's 2px border: (children indent + 1px) left of the item's edge. */
+body.fp-tree-lines .nav-files-container .nav-folder-children > .tree-item > .tree-item-self::after {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  top: calc(-1 * var(--fp-tree-line-reach));
+  height: calc(50% + var(--fp-tree-line-reach));
+  margin-inline-start: calc(-1 * (var(--fp-row-indent) + var(--fp-children-indent) + 1px));
+  width: calc(var(--fp-children-indent) + 1px + 7px); /* ends at the chevron glyph's left edge */
+  border-left: var(--fp-tree-line-width) solid var(--fp-tree-line-color);
+  border-bottom: var(--fp-tree-line-width) solid var(--fp-tree-line-color);
+  border-bottom-left-radius: var(--fp-tree-line-radius);
+  pointer-events: none;
+}
+
+/* rows without a chevron: the elbow runs on to the glyph */
+body.fp-tree-lines .nav-files-container .nav-folder-children > .nav-file > .nav-file-title::after,
+body.fp-tree-lines .nav-files-container .nav-folder-children > .betternote-no-children > .nav-folder-title::after,
+body.fp-tree-lines.fp-arrows-off .nav-files-container .nav-folder-children > .nav-folder:not(.betternote) > .nav-folder-title::after {
+  width: calc(var(--fp-children-indent) + 1px + var(--fp-row-indent));
+}
+
+/* the vertical run to the next visible sibling, spanning any nested children.
+   (BetterNotes hides its inner note and Attachments rows; they must not count
+   as "a next sibling" or the real last child would grow a tail.) */
+body.fp-tree-lines .nav-files-container .nav-folder-children > .tree-item:has(~ .tree-item:not(.betternote-hidden-note):not(.betternote-attachments-hidden))::after {
+  content: "";
+  position: absolute;
+  left: calc(-1 * (var(--fp-children-indent) + 1px));
+  top: calc(var(--size-2-2) + var(--nav-item-size) * 0.65); /* the row's vertical center: padding + half of line-height-tight */
+  bottom: -2px; /* bridge the row's margin-bottom to the next L */
+  border-left: var(--fp-tree-line-width) solid var(--fp-tree-line-color);
+  pointer-events: none;
+}

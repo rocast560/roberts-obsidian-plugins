@@ -1,0 +1,21 @@
+{
+  "name": "folder-palette",
+  "version": "0.2.4",
+  "description": "Explorer look for the file explorer: folder colors, icons, collapse arrows and tree lines.",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "node esbuild.config.mjs production",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "builtin-modules": "^4.0.0",
+    "esbuild": "^0.21.5",
+    "obsidian": "^1.5.7",
+    "tslib": "^2.6.2",
+    "typescript": "^5.5.2",
+    "vitest": "^2.0.5"
+  }
+}

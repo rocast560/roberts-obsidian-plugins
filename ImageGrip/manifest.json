@@ -1,0 +1,9 @@
+{
+  "id": "image-grip",
+  "name": "ImageGrip",
+  "version": "0.2.0",
+  "minAppVersion": "1.4.0",
+  "description": "Drag corner handles to resize images in Live Preview; Ctrl+C copies the selected image.",
+  "author": "rober",
+  "isDesktopOnly": false
+}

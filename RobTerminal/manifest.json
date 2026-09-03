@@ -1,0 +1,9 @@
+{
+  "id": "rob-terminal",
+  "name": "RobTerminal",
+  "version": "2.1.2",
+  "minAppVersion": "1.4.0",
+  "description": "A real terminal in Obsidian. Genuine Windows ConPTY via node-pty, rendered with xterm.js - so PSReadLine, psmux, Claude Code and vim all just work. Splits beneath the note, opens from any folder, and can run elevated in a pane.",
+  "author": "Rob",
+  "isDesktopOnly": true
+}

@@ -1,0 +1,9 @@
+{
+	"id": "reminder-suite",
+	"name": "ReminderSuite",
+	"version": "0.1.0",
+	"minAppVersion": "1.5.0",
+	"description": "Google Calendar sync, calendar view, and a to-do reminder sidebar.",
+	"author": "rober",
+	"isDesktopOnly": false
+}

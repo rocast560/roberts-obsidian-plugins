@@ -1,0 +1,9 @@
+{
+  "id": "folder-palette",
+  "name": "FolderPalette",
+  "version": "0.2.4",
+  "minAppVersion": "1.4.0",
+  "description": "Explorer look for the file explorer: folder colors, icons, collapse arrows and tree lines.",
+  "author": "rober",
+  "isDesktopOnly": false
+}

@@ -1,0 +1,32 @@
+.imagegrip-selected img {
+  outline: 2px solid var(--interactive-accent);
+  outline-offset: -1px;
+}
+
+/* Hosted on <body>, fixed to the image's viewport rect (see SelectionController). */
+.imagegrip-overlay {
+  position: fixed;
+  pointer-events: none;
+  z-index: 25; /* above editor content (status bar is 15), below popovers (30) and modals */
+}
+
+.imagegrip-handle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  background: var(--interactive-accent);
+  border: 2px solid var(--background-primary);
+  border-radius: 3px;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+.imagegrip-handle.imagegrip-hidden {
+  display: none;
+}
+
+.imagegrip-handle[data-corner="nw"] { top: -6px; left: -6px; cursor: nwse-resize; }
+.imagegrip-handle[data-corner="ne"] { top: -6px; right: -6px; cursor: nesw-resize; }
+.imagegrip-handle[data-corner="sw"] { bottom: -6px; left: -6px; cursor: nesw-resize; }
+.imagegrip-handle[data-corner="se"] { bottom: -6px; right: -6px; cursor: nwse-resize; }
