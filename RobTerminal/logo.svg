@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07B571"/><stop offset="1" stop-color="#048B56"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="115" fill="url(#bg)"/>
+  <!-- glyph: 288x288 keyline, 112 to 400 -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="40" stroke-linecap="round" stroke-linejoin="round">
+    <!-- the note the terminal splits beneath -->
+    <path d="M132 132H380" stroke-opacity="0.55"/>
+    <!-- > prompt -->
+    <path d="M132 212L220 296L132 380"/>
+    <!-- _ cursor -->
+    <path d="M276 380H380"/>
+  </g>
+</svg>

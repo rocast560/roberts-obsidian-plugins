@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- FolderPalette: a wide folder whose face is three paint chips (1.0, 0.7, 0.4),
+       split by two 24-wide slots that stop short of the edges so the outline stays whole. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#EA6F2F"/><stop offset="1" stop-color="#BD4D00"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="115" fill="url(#bg)"/>
+  <g fill="#FFFFFF">
+    <!-- left chip, carries the tab -->
+    <path d="M120 384 A24 24 0 0 1 96 360 V152 A24 24 0 0 1 120 128 H148 C166 128 170 168 188 168 H199
+             V204 A12 12 0 0 0 187 216 V336 A12 12 0 0 0 199 348 V384 Z"/>
+    <!-- middle chip -->
+    <path fill-opacity="0.7" d="M199 168 H313 V204 A12 12 0 0 0 301 216 V336 A12 12 0 0 0 313 348 V384 H199
+             V348 A12 12 0 0 0 211 336 V216 A12 12 0 0 0 199 204 Z"/>
+    <!-- right chip -->
+    <path fill-opacity="0.4" d="M313 168 H392 A24 24 0 0 1 416 192 V360 A24 24 0 0 1 392 384 H313
+             V348 A12 12 0 0 0 325 336 V216 A12 12 0 0 0 313 204 Z"/>
+  </g>
+</svg>
