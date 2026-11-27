@@ -1,0 +1,9 @@
+{
+  "id": "flowpath",
+  "name": "FlowPath",
+  "version": "0.2.0",
+  "minAppVersion": "1.4.0",
+  "description": "Clickable flow charts of options. Each node links to a BetterNote; links in notes jump straight to a node in a separate window.",
+  "author": "rober",
+  "isDesktopOnly": true
+}
